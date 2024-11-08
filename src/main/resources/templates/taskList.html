@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Tareas</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div class="container">
+    <h2>Listado de Tareas</h2>
+
+    <div>
+        <a href="/task/new" class="btn">Añadir Nueva Tarea</a>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Fecha de Inicio</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="task : ${tasks}">
+                <td th:text="${task.nombre}"></td>
+                <td th:text="${task.descripcion}"></td>
+                <td th:text="${task.fechaInicio}"></td>
+                <td>
+                    <form th:action="@{/task/delete/{id}(id=${task.id})}" method="post" style="display:inline;">
+                        <input type="hidden" name="_method" value="delete">
+                        <button type="submit" class="btn btn-delete">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
